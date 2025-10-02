@@ -87,15 +87,35 @@ Yakkai_Neri--1/
 
 2. **Install required packages**
    ```bash
-   pip install flask flask-sqlalchemy
+   pip install -r requirements.txt
    ```
 
-3. **Run the application**
+3. **Set up database (Choose one option):**
+
+   **Option A: Neon Database (Recommended for production)**
+   ```bash
+   # Copy environment template
+   cp .env.example .env
+   
+   # Edit .env with your Neon connection string
+   # Get it from: https://console.neon.tech/
+   # See NEON_SETUP.md for detailed instructions
+   
+   # Test connection
+   python test_neon.py
+   ```
+
+   **Option B: Local SQLite (Development only)**
+   ```bash
+   # No setup needed - SQLite file created automatically
+   ```
+
+4. **Run the application**
    ```bash
    python app.py
    ```
 
-4. **Open your browser and visit**
+5. **Open your browser and visit**
    ```
    http://127.0.0.1:5000
    ```
@@ -124,16 +144,33 @@ Yakkai_Neri--1/
 
 ## 💾 Database
 
-The application uses SQLite database with the following tables:
+The application supports multiple database configurations:
 
-### WellnessSubmission
+### 🐘 Neon PostgreSQL (Recommended for Production)
+- **Serverless PostgreSQL** optimized for modern applications
+- **Persistent data** that survives deployments
+- **Auto-scaling** with usage-based pricing
+- **Free tier** with generous limits
+- **Perfect for Vercel** deployment
+
+**Setup**: See `NEON_SETUP.md` for complete instructions
+**Test**: Run `python test_neon.py` to verify connection
+
+### 📁 SQLite (Local Development)
+- **File-based database** for local development
+- **Automatic setup** - no configuration needed
+- **Development only** - not suitable for production
+
+### Database Tables
+
+#### WellnessSubmission
 - Individual wellness assessment responses
 - Stores questionnaire answers (q1-q12)
 - Personal information (name, email, mobile, designation)
 - Total score calculation
 - Company code tracking
 
-### Company
+#### Company
 - Corporate client information
 - Contact details
 - Employee count and industry
@@ -177,7 +214,36 @@ All pages are designed to be responsive and work well on:
 
 ## 🚀 Production Deployment
 
-For production deployment:
+### Vercel + Neon Deployment (Recommended)
+
+The application is optimized for Vercel deployment with Neon database:
+
+1. **Set up Neon Database:**
+   - Create account at [neon.tech](https://neon.tech/)
+   - Get your connection string
+   - See `NEON_SETUP.md` for detailed instructions
+
+2. **Deploy to Vercel:**
+   - Push code to GitHub/GitLab/Bitbucket
+   - Go to [vercel.com](https://vercel.com/) and import your repository
+   - Add `DATABASE_URL` environment variable in Vercel settings
+
+3. **Environment Variables for Vercel:**
+   - `DATABASE_URL` - Your Neon connection string
+   - `SECRET_KEY` - Random secret key for Flask
+
+4. **Files for Vercel Deployment:**
+   - `vercel.json` - Vercel configuration
+   - `wsgi.py` - WSGI entry point
+   - `.vercelignore` - Deployment exclusions
+   - `VERCEL_DEPLOY.md` - Detailed deployment guide
+   - `NEON_SETUP.md` - Database setup guide
+
+**📖 Read `VERCEL_DEPLOY.md` and `NEON_SETUP.md` for complete instructions.**
+
+### Other Production Options
+
+For traditional hosting:
 1. Set `debug=False` in `app.py`
 2. Use a production WSGI server like Gunicorn
 3. Configure environment variables for sensitive data

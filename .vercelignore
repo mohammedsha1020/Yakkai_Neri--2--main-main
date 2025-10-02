@@ -1,0 +1,62 @@
+# Vercel ignore file
+# Exclude files that don't need to be deployed
+
+# Environment files (contains sensitive data)
+.env
+.env.local
+.env.example
+
+# Development files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/
+.gitignore
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Local development files
+*.db
+*.sqlite
+*.sqlite3
+wellness.db
+app.py.bak
+test_database.py
+reset_db.py
+setup.bat
+run.bat
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Instance folder
+instance/

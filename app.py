@@ -1,17 +1,38 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # --- UPDATED LINE ---
 # This tells Flask to look for HTML files in the 'templates' folder
 # and static files in the 'static' folder (proper Flask structure).
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
-
 # --- Database Configuration ---
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wellness.db'
+# Priority: Environment variable > Neon Database > Local SQLite
+database_url = os.environ.get('DATABASE_URL')
+
+if database_url:
+    # Use Neon PostgreSQL database (production/development with DATABASE_URL)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    app.config['SQLALCHEMY_ECHO'] = False  # Disable SQL logging for production
+    print("🐘 Using Neon PostgreSQL database")
+elif os.environ.get('VERCEL'):
+    # Fallback for Vercel if no DATABASE_URL is set
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    app.config['SQLALCHEMY_ECHO'] = False
+    print("⚠️  Using in-memory SQLite (data will not persist)")
+else:
+    # Local development fallback
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wellness.db'
+    app.config['SQLALCHEMY_ECHO'] = True
+    print("📁 Using local SQLite database")
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True  # Logs all SQL statements to the console
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 db = SQLAlchemy(app)
 
@@ -39,7 +60,7 @@ class WellnessSubmission(db.Model):
     email = db.Column(db.String(120))
     designation = db.Column(db.String(100))
     total_score = db.Column(db.Integer)
-    submission_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp())
+    submission_date = db.Column(db.DateTime, default=db.func.current_timestamp())
 
 class Company(db.Model):
     __tablename__ = 'companies'
@@ -51,7 +72,7 @@ class Company(db.Model):
     employee_count = db.Column(db.Integer)
     industry = db.Column(db.String(100))
     company_code = db.Column(db.String(50), unique=True, nullable=False)
-    created_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp())
+    created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
 
 # --- Routes ---
 
@@ -275,7 +296,17 @@ def debug_submissions():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# Initialize database tables
+with app.app_context():
+    db.create_all()
+
+# For Vercel serverless deployment, always initialize tables
+if os.environ.get('VERCEL'):
+    with app.app_context():
+        db.create_all()
+
 if __name__ == "__main__":
+    # Local development mode
     with app.app_context():
         print("Creating database tables if they don't exist...")
         db.create_all()
