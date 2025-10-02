@@ -369,3 +369,4 @@ body { background: #f7f7f7; margin: 0; font-family: 'Segoe UI', sans-serif; }
     .nav-links { display: flex; justify-content: space-between; margin-top: 2rem; }
     .nav-links a { background: #00ff26; color: #fff; padding: 0.7rem 1.5rem; border-radius: 6px; text-decoration: none; transition: background 0.2s; }
     .nav-links a:hover { background: #00ff26; }
+

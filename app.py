@@ -1,14 +1,15 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import pymysql
+import os
 
-# Register MySQL driver
-pymysql.install_as_MySQLdb()
+# --- UPDATED LINE ---
+# This tells Flask to look for HTML files in the 'templates' folder
+# and static files in the 'static' folder (proper Flask structure).
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
-app = Flask(__name__)
 
 # --- Database Configuration ---
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/yakkai_neri'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wellness.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True  # Logs all SQL statements to the console
 
@@ -19,7 +20,6 @@ db = SQLAlchemy(app)
 
 class WellnessSubmission(db.Model):
     __tablename__ = 'wellness_assessments'
-    __table_args__ = {'mysql_engine': 'InnoDB'}
     id = db.Column(db.Integer, primary_key=True)
     company_code = db.Column(db.String(50))
     q1 = db.Column(db.String(10))
@@ -43,7 +43,6 @@ class WellnessSubmission(db.Model):
 
 class Company(db.Model):
     __tablename__ = 'companies'
-    __table_args__ = {'mysql_engine': 'InnoDB'}
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(100), nullable=False)
     contact_person = db.Column(db.String(100), nullable=False)
@@ -56,12 +55,12 @@ class Company(db.Model):
 
 # --- Routes ---
 
-# UPDATED: This now serves index.html as the home page.
+# This now serves index.html as the home page from your root folder.
 @app.route("/")
 def home():
     return render_template("index.html")
 
-# ADDED: A new route for the corporate-yoga.html page
+# This route serves the corporate-yoga.html page from your root folder.
 @app.route("/corporate-yoga")
 def corporate_yoga():
     return render_template("corporate-yoga.html", company_code="ABC123")
@@ -78,6 +77,67 @@ def corporate_onboard():
 @app.route("/submission_success")
 def submission_success():
     return render_template("submission-success.html")
+
+# Additional page routes
+@app.route("/courses")
+def courses():
+    return render_template("Courses.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+@app.route("/meet-the-trainer")
+def meet_the_trainer():
+    return render_template("meet-the-trainer.html")
+
+@app.route("/workshops")
+def workshops():
+    return render_template("Workshops.html")
+
+@app.route("/adolescence")
+def adolescence():
+    return render_template("Adolescence.html")
+
+@app.route("/prenatal-postnatal")
+def prenatal_postnatal():
+    return render_template("Prenatal & Postnatal.html")
+
+@app.route("/professional")
+def professional():
+    return render_template("professional.html")
+
+@app.route("/tech-supported-yoga")
+def tech_supported_yoga():
+    return render_template("Tech-supported Yoga.html")
+
+@app.route("/therapy")
+def therapy():
+    return render_template("therapy.html")
+
+@app.route("/women-wellness")
+def women_wellness():
+    return render_template("Women-Wellness.html")
+
+@app.route("/women-seniors")
+def women_seniors():
+    return render_template("women-seniors.html")
+
+@app.route("/yoga-as-sport")
+def yoga_as_sport():
+    return render_template("yoga-as-sport.html")
+
+@app.route("/yoga-for-sport")
+def yoga_for_sport():
+    return render_template("yoga-for-sport.html")
+
+@app.route("/wellness")
+def wellness():
+    return render_template("wellness.html")
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
 
 @app.route("/submit_wellness/<company_code>", methods=["POST"])
 def submit_wellness(company_code):
@@ -221,5 +281,3 @@ if __name__ == "__main__":
         db.create_all()
         print("Tables created/verified.")
     app.run(debug=True)
-
-

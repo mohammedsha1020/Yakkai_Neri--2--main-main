@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image" href="Yakkai_Neri/image">
-    <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/script.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -249,52 +249,52 @@
 
         <section class="trainer-gallery-wrapper" >
             <div class="trainer-gallery">
-                <div class="trainer-card" onclick="openLightbox('image/award.jpg')">
-                    <img src="images/award.jpg" alt="Honored by the Government of Puducherry" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/award.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/award.jpg') }}" alt="Honored by the Government of Puducherry" />
                     <p>Honored by the Government of Puducherry</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/victory.jpg')">
-                    <img src="images/victory.jpg" alt="With the Champion of Champions" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/victory.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/victory.jpg') }}" alt="With the Champion of Champions" />
                     <p class="mt-2 font-medium">With the Champion of Champions</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/Champion-award.jpg')">
-                    <img src="images/Champion-award.jpg" alt="Anna University Yoga Team Coach" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/Champion-award.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/Champion-award.jpg') }}" alt="Anna University Yoga Team Coach" />
                     <p class="mt-2 font-medium">Anna University Yoga Team Coach</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/Facultytraining.jpg')">
-                    <img src="images/Facultytraining.jpg" alt="Corporate Training Expert" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/Facultytraining.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/Facultytraining.jpg') }}" alt="Corporate Training Expert" />
                     <p class="mt-2 font-medium">Corporate Training Expert</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/inthemedia.jpg')">
-                    <img src="images/inthemedia.jpg" alt="In the Media Spotlight" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/inthemedia.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/inthemedia.jpg') }}" alt="In the Media Spotlight" />
                     <p class="mt-2 font-medium">In the Media Spotlight</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/Kriya.jpg')">
-                    <img src="images/Kriya.jpg" alt="Master of Shat Kriya" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/Kriya.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/Kriya.jpg') }}" alt="Master of Shat Kriya" />
                     <p class="mt-2 font-medium">Master of Shat Kriya</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/recognition.jpg')">
-                    <img src="images/recognition.jpg" alt="Recognized on International Yoga Day" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/recognition.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/recognition.jpg') }}" alt="Recognized on International Yoga Day" />
                     <p class="mt-2 font-medium">Recognized on International Yoga Day</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/KCT.jpg')">
-                    <img src="images/KCT.jpg" alt="At Youth Development Camp" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/KCT.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/KCT.jpg') }}" alt="At Youth Development Camp" />
                     <p class="mt-2 font-medium">At Youth Development Camp – Strengthening Youths</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/Adults Training.jpg')">
-                    <img src="images/Adults Training.jpg" alt="At Youth Development Camp" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/Adults Training.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/Adults Training.jpg') }}" alt="At Youth Development Camp" />
                     <p class="mt-2 font-medium">Adults Training</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/one.jpg')">
-                    <img src="images/one.jpg" alt="At Youth Development Camp" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/one.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/one.jpg') }}" alt="At Youth Development Camp" />
                     <p class="mt-2 font-medium">-</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/two.jpg')">
-                    <img src="images/two.jpg" alt="At Youth Development Camp" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/two.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/two.jpg') }}" alt="At Youth Development Camp" />
                     <p class="mt-2 font-medium">-</p>
                 </div>
-                <div class="trainer-card" onclick="openLightbox('images/three.jpg')">
-                    <img src="images/three.jpg" alt="At Youth Development Camp" />
+                <div class="trainer-card" onclick="openLightbox('{{ url_for('static', filename='images/three.jpg') }}')">
+                    <img src="{{ url_for('static', filename='images/three.jpg') }}" alt="At Youth Development Camp" />
                     <p class="mt-2 font-medium">-</p>
                 </div>
             </div>
