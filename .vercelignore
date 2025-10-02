@@ -4,7 +4,6 @@
 # Environment files (contains sensitive data)
 .env
 .env.local
-.env.example
 
 # Development files
 *.pyc
@@ -39,8 +38,8 @@ wellness.db
 app.py.bak
 test_database.py
 reset_db.py
-setup.bat
-run.bat
+debug_vercel.py
+fix_404.py
 
 # IDE files
 .vscode/
