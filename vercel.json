@@ -3,16 +3,8 @@
   "name": "yakkai-neri-yoga-academy",
   "builds": [
     {
-      "src": "wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.9"
-      }
-    },
-    {
-      "src": "static/**",
-      "use": "@vercel/static"
+      "src": "api/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -22,16 +14,11 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/wsgi.py"
+      "dest": "/api/index.js"
     }
   ],
   "env": {
-    "FLASK_ENV": "production",
-    "PYTHONPATH": "/var/task"
+    "NODE_ENV": "production"
   },
-  "functions": {
-    "wsgi.py": {
-      "includeFiles": "**"
-    }
-  }
+  "regions": ["sin1"]
 }

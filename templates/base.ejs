@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Yakkai Neri{% endblock %}</title>
+    <!-- Link to project CSS if present -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/custom-index.css">
+  </head>
+  <body>
+    <header>
+      <!-- simple header; templates can override content block -->
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <!-- footer area -->
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
