@@ -12,7 +12,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../static')));
+
+// Static files - serve from /static route
+app.use('/static', express.static(path.join(__dirname, '../static')));
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -244,8 +246,17 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Debug: Log requests for static files
+app.use((req, res, next) => {
+  if (req.path.startsWith('/static/')) {
+    console.log(`Static file request: ${req.path}`);
+  }
+  next();
+});
+
 // 404 handler
-app.use((req, res) => {
+app.use((req, res, next) => {
+  console.log(`404 - Page not found: ${req.path}`);
   res.status(404).send('Page not found');
 });
 

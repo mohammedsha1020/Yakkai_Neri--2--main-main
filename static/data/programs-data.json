@@ -1,0 +1,54 @@
+{
+  "programs": {
+    "wellness": {
+      "id": "wellness",
+      "title": "Wellness Programs",
+      "description": "Corporate and individual wellness programs designed to improve physical and mental health",
+      "image": "/static/images/banner.jpg",
+      "link": "/wellness",
+      "featured": true
+    },
+    "therapy": {
+      "id": "therapy",
+      "title": "Therapy Programs",
+      "description": "Specialized yoga therapy for specific health conditions and rehabilitation",
+      "image": "/static/images/banner.jpg",
+      "link": "/therapy",
+      "featured": true
+    },
+    "women-wellness": {
+      "id": "women-wellness",
+      "title": "Women & Senior Programs",
+      "description": "Tailored programs for women's health and senior fitness",
+      "image": "/static/images/banner.jpg",
+      "link": "/women-wellness",
+      "featured": true
+    },
+    "professional": {
+      "id": "professional",
+      "title": "Professional Training",
+      "description": "Professional yoga instructor training and certification programs",
+      "image": "/static/images/banner.jpg",
+      "link": "/professional",
+      "featured": true
+    },
+    "workshops": {
+      "id": "workshops",
+      "title": "Workshops",
+      "description": "Special workshops and events for deepening your yoga practice",
+      "image": "/static/images/banner.jpg",
+      "link": "/workshops",
+      "featured": true
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Yakkai Neri Yoga Academy",
+      "description": "Transform Your Life Through the Power of Yoga"
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about our mission and values"
+    }
+  }
+}

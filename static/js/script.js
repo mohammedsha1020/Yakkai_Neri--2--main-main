@@ -48,17 +48,19 @@ const AdminPanel = {
     // Load from JSON file
     loadFromJSON: async function() {
         try {
-            const response = await fetch('data/programs-data.json');
+            const response = await fetch('/static/data/programs-data.json');
             if (response.ok) {
                 const data = await response.json();
                 this.programData = data;
                 console.log('Loaded program data from JSON file');
                 return data;
             }
-            throw new Error('JSON file not found');
+            // Don't throw error, just return null to fallback to localStorage
+            console.log('JSON file not found, using localStorage');
+            return null;
         } catch (error) {
-            console.warn('Could not load from JSON file:', error);
-            throw error;
+            console.log('Could not load from JSON file, using localStorage');
+            return null;
         }
     },
 
@@ -160,9 +162,9 @@ const AdminPanel = {
     <header>
         <nav class="navbar">
             <div class="container">
-                <a href="index.html" class="logo">Yakkai Neri</a>
+                <a href="/" class="logo">Yakkai Neri</a>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="Courses.html">Our Programs</a></li>
                     <li><a href="meet-the-trainer.html">Meet the Trainer</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -1230,6 +1232,72 @@ function validateStep(step) {
 }
 
 // **END OF ADDED CODE FOR MULTI-STEP FORM**
+
+// **BEGIN NAVIGATION MENU FUNCTIONALITY**
+
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+  // Mobile menu button
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const closeMobileMenu = document.getElementById('close-mobile-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', function() {
+      if (mobileMenu) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('mobile-menu');
+      }
+    });
+  }
+  
+  if (closeMobileMenu) {
+    closeMobileMenu.addEventListener('click', function() {
+      if (mobileMenu) {
+        mobileMenu.classList.add('closing');
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+          mobileMenu.classList.remove('mobile-menu', 'closing');
+        }, 300);
+      }
+    });
+  }
+  
+  // Mobile courses dropdown toggle
+  const mobileCoursesToggle = document.getElementById('mobile-courses-toggle');
+  const mobileCoursesMenu = document.getElementById('mobile-courses-menu');
+  const mobileCoursesChevron = document.getElementById('mobile-courses-chevron');
+  
+  if (mobileCoursesToggle && mobileCoursesMenu) {
+    mobileCoursesToggle.addEventListener('click', function() {
+      mobileCoursesMenu.classList.toggle('hidden');
+      if (mobileCoursesChevron) {
+        mobileCoursesChevron.classList.toggle('rotate-180');
+      }
+    });
+  }
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      const isClickInsideMenu = mobileMenu.contains(event.target);
+      const isClickOnButton = mobileMenuButton && mobileMenuButton.contains(event.target);
+      
+      if (!isClickInsideMenu && !isClickOnButton) {
+        mobileMenu.classList.add('closing');
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+          mobileMenu.classList.remove('mobile-menu', 'closing');
+        }, 300);
+      }
+    }
+  });
+  
+  // Initialize AdminPanel
+  AdminPanel.init();
+});
+
+// **END NAVIGATION MENU FUNCTIONALITY**
 
 // Initialize the admin panel when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {

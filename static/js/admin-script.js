@@ -166,12 +166,12 @@ class AdminPanel {
     <header>
         <nav class="navbar">
             <div class="container">
-                <a href="index.html" class="logo">Yakkai Neri</a>
+                <a href="/" class="logo">Yakkai Neri</a>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="Courses.html">Our Programs</a></li>
-                    <li><a href="meet-the-trainer.html">Meet the Trainer</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/courses">Our Programs</a></li>
+                    <li><a href="/meet-the-trainer">Meet the Trainer</a></li>
+                    <li><a href="/contact">Contact</a></li>
                 </ul>
             </div>
         </nav>
@@ -1407,12 +1407,12 @@ class AdminPanel {
         
         // Open the page in a new window/tab
         const pageUrls = {
-            'index': 'index.html',
-            'courses': 'Courses.html',
-            'contact': 'contact.html'
+            'index': '/',
+            'courses': '/courses',
+            'contact': '/contact'
         };
         
-        const url = pageUrls[pageId] || `${pageId}.html`;
+        const url = pageUrls[pageId] || `/${pageId}`;
         window.open(url, '_blank');
         this.showNotification(`Previewing ${pageId} page`, 'success');
     }
