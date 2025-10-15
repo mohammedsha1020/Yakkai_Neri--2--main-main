@@ -39,9 +39,9 @@
     <div class="progress-step" id="stepIndicator3">3</div>
   </div>
 
-  <form id="wellnessForm" action="/submit_wellness/<%= company_code %>" method="POST">
+  <form id="wellnessForm" action="{{ url_for('submit_wellness', company_code=company_code) }}" method="POST">
 
-    <input type="hidden" name="company_code" value="<%= company_code %>">
+    <input type="hidden" name="company_code" value="{{ company_code if company_code else 'self' }}">
 
 
     <!-- Step 1: Physical Health Assessment -->
